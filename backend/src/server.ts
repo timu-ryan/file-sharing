@@ -3,10 +3,14 @@ import type { Request, Response } from "express";
 import path from "path";
 import { promises as fs } from "fs";
 
+import fileRoutes from './routes/fileRoutes';
 import { fileStore } from './storage/fileStore';
 import { config } from './config';
 
 const app = express();
+
+app.use(express.json());
+app.use('/api', fileRoutes);
 
 app.get('/get-all', async (req: Request, res: Response) => {
   const a = fileStore.getAll()
@@ -39,13 +43,14 @@ app.get("/", (req: Request, res: Response) => {
   res.status(200).send("Hello World!");
 })
 
-app.get("/download", (req: Request, res: Response) => {
-  res.status(200).download('./src/server.ts');
-})
+const port = Number(process.env.PORT) || 3000;
 
-async function start(){
-  await fileStore.init()
-  app.listen(3001, () => console.log("Server started on port 3001"));
+async function start(): Promise<void> {
+  await fileStore.init();
+
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
 }
 
 const _ = start();
