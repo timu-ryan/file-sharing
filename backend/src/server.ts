@@ -40,9 +40,8 @@ app.get('/download/:token', async (req: Request, res: Response) => {
   return res.download(filePath, record.originalName);
 });
 
-app.get("/", (req: Request, res: Response) => {
-  res.status(200).send("Hello World!");
-})
+const staticDir = path.resolve(__dirname, '..', 'public');
+app.use(express.static(staticDir));
 
 const port = Number(process.env.PORT) || 3000;
 

@@ -1,0 +1,129 @@
+:root {
+    --accent: #2f80ed;
+    --accent-dark: #1c4f8c;
+    --border: #dfe6f0;
+    --background: #f5f7fb;
+    --text: #1f2d3d;
+    --muted: #6b7a90;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+}
+
+.container {
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 0 16px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(31, 45, 61, 0.1);
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.file-label {
+    font-weight: 600;
+}
+
+input[type="file"] {
+    padding: 12px;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    background-color: #fdfdfd;
+}
+
+input[type="password"],
+input[type="text"] {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--accent);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: var(--accent-dark);
+}
+
+.status {
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #eef4ff;
+    color: var(--muted);
+}
+
+.status.error {
+    background-color: #ffeaea;
+    color: #b95050;
+}
+
+.progress {
+    width: 100%;
+    height: 10px;
+    background-color: #eef1f6;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background-color: var(--accent);
+    transition: width 0.2s ease-in-out;
+}
+
+.result a {
+    color: var(--accent);
+    word-break: break-all;
+}
+
+.stats ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+}
+
+.stats li {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 480px) {
+    .stats li {
+        flex-direction: column;
+        gap: 4px;
+    }
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сервис обмена файлами</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="container">
+    <h1>Сервис обмена файлами</h1>
+    <section class="card">
+        <form id="upload-form">
+            <label for="file-input" class="file-label">Выберите файл для загрузки</label>
+            <input type="file" id="file-input" name="file" required>
+            <label for="api-key">API ключ (если требуется)</label>
+            <input type="password" id="api-key" placeholder="Введите API ключ">
+            <button type="submit">Загрузить</button>
+        </form>
+        <div id="status" class="status" hidden></div>
+        <div class="progress" hidden>
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div id="result" class="result" hidden>
+            <p>Ссылка для скачивания:</p>
+            <a id="download-link" href="#" target="_blank" rel="noopener noreferrer"></a>
+            <p id="expires"></p>
+        </div>
+    </section>
+    <section class="card stats" id="stats" hidden>
+        <h2>Статистика</h2>
+        <ul>
+            <li><strong>Файлов в хранилище:</strong> <span id="stats-files">0</span></li>
+            <li><strong>Всего скачиваний:</strong> <span id="stats-downloads">0</span></li>
+            <li><strong>Использовано пространства:</strong> <span id="stats-storage">0</span></li>
+        </ul>
+    </section>
+</main>
+<script src="/app.js" defer></script>
+</body>
+</html>
