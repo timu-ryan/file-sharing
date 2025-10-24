@@ -1,4 +1,7 @@
 import path from "path";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const retentionDays = Number(process.env.RETENTION_DAYS ?? 30);
 
