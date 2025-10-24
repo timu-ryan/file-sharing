@@ -5,6 +5,7 @@ import { promises as fs } from "fs";
 
 import fileRoutes from './routes/fileRoutes';
 import { fileStore } from './storage/fileStore';
+import { cleanupService } from './services/cleanupService';
 import { config } from './config';
 
 const app = express();
@@ -47,6 +48,8 @@ const port = Number(process.env.PORT) || 3000;
 
 async function start(): Promise<void> {
   await fileStore.init();
+  await cleanupService.runCleanup();
+  cleanupService.start();
 
   app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
