@@ -1,0 +1,18 @@
+export const elements = {
+  form: document.getElementById('upload-form'),
+  fileInput: document.getElementById('file-input'),
+  apiKeyInput: document.getElementById('api-key'),
+  statusEl: document.getElementById('status'),
+  progressContainer: document.querySelector('.progress'),
+  progressBar: document.getElementById('progress-bar'),
+  resultEl: document.getElementById('result'),
+  downloadLinkEl: document.getElementById('download-link'),
+  expiresEl: document.getElementById('expires'),
+  statsSection: document.getElementById('stats'),
+  statsFiles: document.getElementById('stats-files'),
+  statsDownloads: document.getElementById('stats-downloads'),
+  statsStorage: document.getElementById('stats-storage'),
+  dropArea: document.getElementById('drop-area'),
+  selectedFileEl: document.getElementById('selected-file'),
+  copyLinkButton: document.getElementById('copy-link'),
+};

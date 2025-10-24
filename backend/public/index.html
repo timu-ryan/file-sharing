@@ -29,7 +29,10 @@
         </div>
         <div id="result" class="result" hidden>
             <p>Ссылка для скачивания:</p>
-            <a id="download-link" href="#" target="_blank" rel="noopener noreferrer"></a>
+            <div class="result__actions">
+                <a id="download-link" href="#" target="_blank" rel="noopener noreferrer"></a>
+                <button type="button" id="copy-link" class="button-secondary">Скопировать ссылку</button>
+            </div>
             <p id="expires"></p>
         </div>
     </section>
@@ -42,6 +45,6 @@
         </ul>
     </section>
 </main>
-<script src="/app.js" defer></script>
+<script type="module" src="/js/main.js"></script>
 </body>
 </html>

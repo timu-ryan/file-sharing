@@ -124,6 +124,7 @@ button:hover {
 }
 
 .status {
+    margin-top: 12px;
     padding: 12px;
     border-radius: 8px;
     background-color: #eef4ff;
@@ -153,6 +154,24 @@ button:hover {
 .result a {
     color: var(--accent);
     word-break: break-all;
+}
+
+.result__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.button-secondary {
+    background-color: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 10px 16px;
+}
+
+.button-secondary:hover {
+    background-color: rgba(47, 128, 237, 0.1);
 }
 
 .stats ul {
