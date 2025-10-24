@@ -11,8 +11,14 @@
     <h1>Сервис обмена файлами</h1>
     <section class="card">
         <form id="upload-form">
-            <label for="file-input" class="file-label">Выберите файл для загрузки</label>
-            <input type="file" id="file-input" name="file" required>
+            <div id="drop-area" class="drop-area" role="button" tabindex="0" aria-label="Зона загрузки файлов">
+                <label for="file-input" class="drop-area__content">
+                    <span class="drop-area__title">Перетащите файл сюда</span>
+                    <span class="drop-area__subtitle">или нажмите дважды, чтобы выбрать на устройстве</span>
+                </label>
+                <span id="selected-file" class="drop-area__file" hidden></span>
+                <input type="file" id="file-input" name="file" required hidden>
+            </div>
             <label for="api-key">API ключ (если требуется)</label>
             <input type="password" id="api-key" placeholder="Введите API ключ">
             <button type="submit">Загрузить</button>

@@ -43,8 +43,55 @@ form {
     gap: 16px;
 }
 
-.file-label {
-    font-weight: 600;
+.drop-area {
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    padding: 32px 24px;
+    background-color: #fdfdfd;
+    text-align: center;
+    transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.drop-area * {
+    cursor: pointer;
+}
+
+.drop-area:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(47, 128, 237, 0.2);
+}
+
+.drop-area.dragover {
+    border-color: var(--accent);
+    background-color: #eef4ff;
+}
+
+.drop-area__content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--muted);
+    font-weight: 500;
+}
+
+.drop-area__title {
+    font-size: 18px;
+    color: var(--text);
+}
+
+.drop-area__file {
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 500;
+    word-break: break-all;
+}
+
+.drop-area input[type="file"] {
+    display: none;
 }
 
 input[type="file"] {

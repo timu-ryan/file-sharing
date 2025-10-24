@@ -11,6 +11,82 @@ const statsSection = document.getElementById('stats');
 const statsFiles = document.getElementById('stats-files');
 const statsDownloads = document.getElementById('stats-downloads');
 const statsStorage = document.getElementById('stats-storage');
+const dropArea = document.getElementById('drop-area');
+const selectedFileEl = document.getElementById('selected-file');
+
+if (dropArea) {
+  ['dragover', 'drop'].forEach((eventName) => {
+    document.addEventListener(eventName, (event) => {
+      event.preventDefault();
+    });
+  });
+
+  const preventDefaults = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
+  dropArea.addEventListener('dragenter', (event) => {
+    preventDefaults(event);
+    dropArea.classList.add('dragover');
+  });
+
+  dropArea.addEventListener('dragover', (event) => {
+    preventDefaults(event);
+    dropArea.classList.add('dragover');
+    if (event.dataTransfer) {
+      event.dataTransfer.dropEffect = 'copy';
+    }
+  });
+
+  dropArea.addEventListener('dragleave', (event) => {
+    preventDefaults(event);
+    if (!dropArea.contains(event.relatedTarget)) {
+      dropArea.classList.remove('dragover');
+    }
+  });
+
+  dropArea.addEventListener('dragend', () => {
+    dropArea.classList.remove('dragover');
+  });
+
+  dropArea.addEventListener('drop', (event) => {
+    preventDefaults(event);
+    dropArea.classList.remove('dragover');
+    const files = event.dataTransfer?.files;
+    if (!files || files.length === 0) {
+      return;
+    }
+    const fileList = Array.from(files).slice(0, 1);
+    try {
+      if (typeof DataTransfer !== 'undefined') {
+        const transfer = new DataTransfer();
+        fileList.forEach((file) => {
+          transfer.items.add(file);
+        });
+        fileInput.files = transfer.files;
+      } else {
+        fileInput.files = files;
+      }
+    } catch (error) {
+      console.warn('Не удалось обработать перетаскивание файла', error);
+      setStatus('Не удалось обработать файл. Выберите его вручную.', true);
+      return;
+    }
+    fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+
+  dropArea.addEventListener('dblclick', () => {
+    fileInput.click();
+  });
+
+  dropArea.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      fileInput.click();
+    }
+  });
+}
 
 function setStatus(message, isError = false) {
   statusEl.textContent = message;
@@ -35,6 +111,19 @@ function formatBytes(bytes) {
   return `${value.toFixed(value < 10 && i > 0 ? 1 : 0)} ${sizes[i]}`;
 }
 
+function updateSelectedFileDisplay(file) {
+  if (!selectedFileEl) {
+    return;
+  }
+  if (file) {
+    selectedFileEl.textContent = `${file.name} (${formatBytes(file.size)})`;
+    selectedFileEl.hidden = false;
+  } else {
+    selectedFileEl.textContent = '';
+    selectedFileEl.hidden = true;
+  }
+}
+
 async function refreshStats() {
   try {
     const response = await fetch('/api/stats');
@@ -51,6 +140,11 @@ async function refreshStats() {
     statsSection.hidden = true;
   }
 }
+
+fileInput.addEventListener('change', () => {
+  const file = fileInput.files?.[0] ?? null;
+  updateSelectedFileDisplay(file);
+});
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -94,6 +188,7 @@ form.addEventListener('submit', (event) => {
         expiresEl.textContent = `Ссылка останется активной, пока файл скачивается хотя бы раз в ${data.expiresInDays} дней.`;
         resultEl.hidden = false;
         form.reset();
+        updateSelectedFileDisplay(null);
         void refreshStats();
       } catch (error) {
         console.error('Failed to parse response', error);
