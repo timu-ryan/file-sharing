@@ -73,3 +73,9 @@ backend/
 - Статические файлы лежат в `backend/public/`.
 - Главный модуль — `public/js/main.js`, остальные разбиты по функциональным блокам (`dragAndDrop`, `upload`, `stats`, т.д.).
 - Для копирования ссылок используется `navigator.clipboard` с fallback на `document.execCommand`.
+
+## Скриншоты
+
+![Главная страница с формой загрузки](screenshots/main-page.png)
+
+![Состояние после загрузки с ссылкой для скачивания](screenshots/success-uploading.png)
